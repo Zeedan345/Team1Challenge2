@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DestinationView
+  m_Name: EHPortal
   m_Shader: {fileID: 4800000, guid: e719f9cad4141884bb6dcec1e3a03508, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
