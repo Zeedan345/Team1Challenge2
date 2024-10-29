@@ -9,10 +9,19 @@ public class PortalTelportor : MonoBehaviour
     public bool isHome;
     public Transform reciever;
     public AudioSource teleportSound;
+    public Light flashLight;
+    public float flashDuration = 2f;
 
     private Rigidbody playerRigidbody;
     private Vector3 movePlayerAway = new Vector3 (2f, 0, 0);
     private bool playerIsOverlapping = false;
+
+    private void Start()
+    {
+        playerRigidbody = player.GetComponent<Rigidbody>();
+        playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        flashLight.enabled = false;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -39,10 +48,17 @@ public class PortalTelportor : MonoBehaviour
                 {
                     player.transform.position = reciever.position + positionOffset + movePlayerAway;
                 }
-                
+                flashLight.transform.position = player.transform.position;
+                StartCoroutine(FlashEffect());
                 playerIsOverlapping = false;
             }
         }
+    }
+    private IEnumerator FlashEffect()
+    {
+        flashLight.enabled = true;  // Flash light on
+        yield return new WaitForSeconds(flashDuration);
+        flashLight.enabled = false; // Flash light off
     }
 
     private void OnTriggerEnter(Collider other)
